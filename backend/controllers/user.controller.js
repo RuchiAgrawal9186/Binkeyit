@@ -365,14 +365,16 @@ export async function resetPassword(req, res) {
 export async function refreshToken(req, res) {
   try {
     const refreshToken =
-      req.cookies.refreshToken || req.header.authorization.split(" ")[1];
+      req.cookies.refreshToken ||
+      (req.headers["authorization"] &&
+        req.headers["authorization"].split(" ")[1]);
     if (!refreshToken) {
       return res
         .status(400)
         .json({ message: "Invalid token", success: false, error: true });
     }
 
-    const verifyToken = await jwt.verify(
+    const verifyToken = jwt.verify(
       refreshToken,
       process.env.SECRET_KEY_REFRESH_TOKEN
     );
