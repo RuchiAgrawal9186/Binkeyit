@@ -5,10 +5,12 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <Fragment>
+      <Toaster />
       <Navbar />
       <main className="min-h-[83dvh]">
         <Outlet />

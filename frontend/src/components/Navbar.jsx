@@ -1,12 +1,19 @@
 import React, { Fragment } from "react";
 import logo from "../assets/logo.png";
 import Search from "./Search";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconUserCircle } from "@tabler/icons-react";
 import useMobile from "../hooks/useMobile";
+import { IconShoppingCart } from "@tabler/icons-react";
 
 const Navbar = () => {
   const [isMobile] = useMobile();
+  const navigate = useNavigate()
+
+  const redirectLoginPage = () => {
+    navigate("/")
+  }
+
   return (
     <Fragment>
       <header className="lg:h-15 sm:h-27 shadow-md sticky top-0 flex flex-col items-center sm:gap-2">
@@ -40,7 +47,19 @@ const Navbar = () => {
               <button className="text-neutral-600 lg:hidden sm:mt-2">
                 <IconUserCircle stroke={2} />
               </button>
-              <div className="hidden lg:block">login and my cart</div>
+              {/* desktop showing */}
+              <div className="hidden lg:flex  gap-10 item-center ">
+                <button onClick={redirectLoginPage} className="text-lg px-2">Login</button>
+                <button className="flex items-center gap-2 bg-green-800 text-white px-2 py-2 rounded mt-1 hover:bg-green-700">
+                  <div className="animate-bounce">
+                    <IconShoppingCart size={25} />
+                  </div>
+                  <div className="font-semibold"> 
+                    <p>My Cart</p>
+                   
+                  </div>
+                </button>
+              </div>
             </div>
 
             {/* my card */}
