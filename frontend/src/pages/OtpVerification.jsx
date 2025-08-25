@@ -43,7 +43,7 @@ const OtpVerification = () => {
         navigate("/reset-password", {
           state: {
             data: res.data,
-            email: email,
+            email: location?.state?.email,
           },
         });
       }
