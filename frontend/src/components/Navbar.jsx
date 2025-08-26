@@ -11,7 +11,7 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const redirectLoginPage = () => {
-    navigate("/")
+    navigate("/login")
   }
 
   return (
