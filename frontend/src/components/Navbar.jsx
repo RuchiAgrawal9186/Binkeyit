@@ -20,7 +20,16 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
   setUserMenu(false)
-}
+  }
+  
+  const handleMobileUser = () => {
+    if (!user._id)
+    {
+      navigate("/login")
+      return
+    }
+    navigate("/user")
+  }
   return (
     <Fragment>
       <header className="lg:h-15 sm:h-27 shadow-md sticky top-0 flex flex-col items-center sm:gap-2">
@@ -51,7 +60,7 @@ const Navbar = () => {
 
             {/* login and my card */}
             <div className="">
-              <button className="text-neutral-600 lg:hidden sm:mt-2">
+              <button className="text-neutral-600 lg:hidden sm:mt-2 cursor-pointer" onClick={handleMobileUser}>
                 <IconUserCircle stroke={2} />
               </button>
               {/* desktop showing */}
