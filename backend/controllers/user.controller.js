@@ -126,6 +126,10 @@ export async function loginController(req, res) {
     const accessToken = generateAccessToken(user._id);
     const refreshToken = await generateRefreshToken(user._id);
 
+    const updateUser = await UserModel.findByIdAndUpdate(user?._id, {
+      last_login_date: new Date(),
+    });
+
     const cookiesOption = {
       httpOnly: true,
       secure: true,
@@ -297,7 +301,10 @@ export async function verifyForgotPassword(req, res) {
         .status(400)
         .json({ message: "Invalid OTP", success: false, error: true });
     }
-
+    const updateUser = await UserModel.findByIdAndUpdate(user?._id, {
+      forgot_password_otp: "",
+      forgot_password_expiry: "",
+    });
     return res.status(200).json({
       message: "Verify OTP successfully",
       success: true,
@@ -402,6 +409,24 @@ export async function refreshToken(req, res) {
       data: {
         accessToken: accessToken,
       },
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: error.message || error, error: true, success: false });
+  }
+}
+
+export async function userDetails(req, res) {
+  try {
+    const userId = req.userId;
+
+    const user = await UserModel.findById(userId);
+    return res.status(200).json({
+      message: "user details",
+      data: user,
+      success: true,
+      error: false,
     });
   } catch (error) {
     return res
