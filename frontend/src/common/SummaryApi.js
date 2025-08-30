@@ -23,7 +23,15 @@ const SummaryApi = {
   },
   refreshToken: {
     url: "/api/user/refresh-token",
-    method:post
+    method: "post",
+  },
+  getUserDetails: {
+    url: "/api/user/user-details",
+    method: "get",
+  },
+  logout: {
+    url: "/api/user/logout",
+    method: "post",
   },
 };
 
